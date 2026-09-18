@@ -1,0 +1,61 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #1c1b29;
+  --color-ink-soft: #504e63;
+  --color-bg: #faf7f2;
+  --color-surface: #ffffff;
+  --color-border: #e7e2d9;
+  --color-primary: #4f3ff0;
+  --color-primary-dark: #3b2fc9;
+  --color-primary-soft: #eeebfd;
+  --color-accent: #ff8a3d;
+  --color-accent-soft: #ffede0;
+  --color-success: #1f9d6b;
+  --color-success-soft: #e5f6ee;
+  --color-warning: #b3760a;
+  --color-warning-soft: #fdf1dd;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.chip {
+  @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors cursor-pointer select-none;
+}
+
+.chip-inactive {
+  @apply border-border bg-white text-ink-soft hover:border-primary;
+}
+
+.chip-active {
+  @apply border-primary bg-primary text-white;
+}
+
+.card {
+  @apply rounded-2xl border border-border bg-white shadow-[0_1px_2px_rgba(28,27,41,0.04)];
+}
