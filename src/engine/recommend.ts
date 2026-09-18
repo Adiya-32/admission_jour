@@ -16,19 +16,19 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
   const reasons: RecommendationReason[] = []
   let score = 0
 
-  // Field match — 30
+  // Field match — 25
   const matchedFields = program.fields.filter((f) => profile.interests.includes(f))
   if (matchedFields.length > 0) {
-    const points = Math.min(30, matchedFields.length * 18)
+    const points = Math.min(25, matchedFields.length * 15)
     score += points
     reasons.push({ type: 'match', text: `Совпадает с вашим интересом: ${matchedFields.join(', ')}` })
   } else if (profile.interests.length > 0) {
     reasons.push({ type: 'caution', text: 'Направление не входит в список ваших интересов' })
   }
 
-  // Budget — 20
+  // Budget — 18
   if (program.tuitionUSD <= profile.budgetUSD) {
-    score += 20
+    score += 18
     if (program.tuitionUSD === 0) {
       reasons.push({ type: 'match', text: 'Обучение бесплатное или полностью покрывается грантом' })
     } else {
@@ -38,7 +38,7 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
       })
     }
   } else if (program.scholarshipAvailable) {
-    score += 8
+    score += 7
     reasons.push({
       type: 'caution',
       text: `Стоимость выше бюджета ($${program.tuitionUSD.toLocaleString('ru-RU')}/год), но доступны стипендии — стоит подать заявку на них`,
@@ -50,38 +50,39 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
     })
   }
 
-  // Country — 15
+  // Country — 27 (сильный вес: если страны явно выбраны, несовпадение ощутимо понижает рейтинг)
   if (profile.countries.length === 0) {
-    score += 7
+    score += 13
   } else if (profile.countries.includes(program.country)) {
-    score += 15
+    score += 27
     reasons.push({ type: 'match', text: `Страна в вашем списке предпочтений: ${program.country}` })
   } else {
+    score -= 8
     reasons.push({ type: 'caution', text: `${program.country} не входит в выбранные вами страны` })
   }
 
-  // Readiness: English/GPA/ENT — 25
+  // Readiness: English/GPA/ENT — 17
   let readiness = 0
-  const readinessMax = 25
+  const readinessMax = 17
   const parts: string[] = []
   const cautionParts: string[] = []
 
   if (englishMeetsIELTS(profile.englishLevel, program.minIELTS)) {
-    readiness += 10
+    readiness += 7
     if (program.minIELTS) parts.push(`уровень английского достаточен для требования IELTS ${program.minIELTS}`)
   } else if (program.minIELTS) {
     cautionParts.push(`нужен более высокий английский (обычно IELTS от ${program.minIELTS})`)
   }
 
   if (program.minGPA === undefined || profile.gpa >= program.minGPA) {
-    readiness += 8
+    readiness += 6
     if (program.minGPA) parts.push(`средний балл ${profile.gpa} соответствует порогу ${program.minGPA}`)
   } else {
     cautionParts.push(`средний балл ниже желаемого порога (${program.minGPA})`)
   }
 
   if (profile.exams.ent === undefined || program.minENT === undefined || profile.exams.ent >= program.minENT) {
-    readiness += 7
+    readiness += 4
   } else {
     cautionParts.push(`результат ЕНТ ниже ориентировочного порога (${program.minENT})`)
   }
@@ -113,7 +114,7 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
     reasons.push({ type: 'caution', text: 'Стипендии для иностранцев обычно не предоставляются' })
   }
 
-  return { score: Math.round(score), reasons }
+  return { score: Math.max(0, Math.min(100, Math.round(score))), reasons }
 }
 
 export function getRecommendations(profile: Profile, previousTopIds: string[] = []): Recommendation[] {
