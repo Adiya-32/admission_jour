@@ -41,6 +41,7 @@ interface AppContextValue {
   toggleCompared: (id: string) => void
   toggleStepCompleted: (id: string) => void
   setPreviousTopIds: (ids: string[]) => void
+  submitProfile: (p: Profile, previousTopIds: string[]) => void
   resetAll: () => void
 }
 
@@ -83,6 +84,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
             : [...s.completedSteps, id],
         })),
       setPreviousTopIds: (ids) => setState((s) => ({ ...s, previousTopIds: ids })),
+      submitProfile: (p, previousTopIds) =>
+        setState((s) => ({
+          ...s,
+          profile: p,
+          profileCompleted: true,
+          previousTopIds,
+          comparedIds: [],
+        })),
       resetAll: () => setState(defaultState),
     }),
     [state]

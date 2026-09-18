@@ -11,7 +11,7 @@ function toggleInArray<T>(arr: T[], value: T): T[] {
 }
 
 export function ProfileForm() {
-  const { profile, setProfile, markProfileCompleted, setPreviousTopIds } = useApp()
+  const { profile, submitProfile } = useApp()
   const [draft, setDraft] = useState<Profile>(profile)
   const navigate = useNavigate()
 
@@ -23,9 +23,7 @@ export function ProfileForm() {
     const prevTop = getRecommendations(profile)
       .slice(0, 8)
       .map((r) => r.program.id)
-    setPreviousTopIds(prevTop)
-    setProfile(draft)
-    markProfileCompleted()
+    submitProfile(draft, prevTop)
     navigate('/diagnosis')
   }
 

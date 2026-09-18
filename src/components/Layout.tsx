@@ -1,6 +1,6 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { useApp } from '../state/AppContext'
 
 const STEPS = [
@@ -74,13 +74,51 @@ export function Stepper() {
   )
 }
 
+function ResetControl() {
+  const { profileCompleted, resetAll } = useApp()
+  const navigate = useNavigate()
+  const [confirming, setConfirming] = useState(false)
+
+  if (!profileCompleted) return null
+
+  if (confirming) {
+    return (
+      <div className="flex items-center gap-2 text-xs">
+        <span className="text-ink-soft">Сбросить всё?</span>
+        <button
+          type="button"
+          onClick={() => {
+            resetAll()
+            navigate('/')
+          }}
+          className="font-semibold text-danger hover:underline"
+        >
+          Да, сбросить
+        </button>
+        <button type="button" onClick={() => setConfirming(false)} className="text-ink-soft hover:text-ink">
+          Отмена
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <button type="button" onClick={() => setConfirming(true)} className="text-xs font-medium text-ink-soft hover:text-ink">
+      Начать заново
+    </button>
+  )
+}
+
 export function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
   return (
     <div className="min-h-full">
       <header className="sticky top-0 z-10 border-b border-border bg-bg/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 sm:px-6">
-          <Logo />
+          <div className="flex items-center justify-between">
+            <Logo />
+            <ResetControl />
+          </div>
           {location.pathname !== '/' && <Stepper />}
         </div>
       </header>
