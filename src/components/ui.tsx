@@ -31,12 +31,13 @@ export function Chip({ active, onClick, children }: { active: boolean; onClick: 
   )
 }
 
-export function Badge({ tone = 'primary', children }: { tone?: 'primary' | 'success' | 'warning' | 'accent'; children: ReactNode }) {
+export function Badge({ tone = 'primary', children }: { tone?: 'primary' | 'success' | 'warning' | 'accent' | 'danger'; children: ReactNode }) {
   const toneClasses: Record<string, string> = {
     primary: 'bg-primary-soft text-primary-dark',
     success: 'bg-success-soft text-success',
     warning: 'bg-warning-soft text-warning',
     accent: 'bg-accent-soft text-accent',
+    danger: 'bg-danger-soft text-danger',
   }
   return <span className={clsx('inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold', toneClasses[tone])}>{children}</span>
 }

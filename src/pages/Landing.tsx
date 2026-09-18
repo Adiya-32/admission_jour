@@ -27,9 +27,6 @@ export function Landing() {
             </Button>
           )}
         </div>
-        <p className="mt-4 text-xs text-ink-soft">
-          Ничего не отправляется на сервер — все ответы хранятся только в вашем браузере.
-        </p>
       </div>
 
       <div className="grid gap-4">

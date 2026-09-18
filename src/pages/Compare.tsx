@@ -14,6 +14,7 @@ const ROWS: { label: string; render: (p: (typeof PROGRAMS)[number]) => string }[
   { label: 'Окно дедлайнов', render: (p) => p.deadlineWindow },
   { label: 'Стипендии', render: (p) => (p.scholarshipAvailable ? 'Доступны' : 'Обычно нет') },
   { label: 'Общежитие', render: (p) => (p.dormitory ? 'Есть' : 'Нет') },
+  { label: 'Селективность', render: (p) => `${p.selectivityLevel} (${p.selectivityNote})` },
   { label: 'Репутация', render: (p) => p.reputation },
   { label: 'Сильная сторона', render: (p) => p.whyChosen[0] },
   { label: 'На что обратить внимание', render: (p) => p.weaknesses[0] },

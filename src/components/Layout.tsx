@@ -80,24 +80,11 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className="min-h-full">
       <header className="sticky top-0 z-10 border-b border-border bg-bg/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-4 sm:px-6">
-          <div className="flex items-center justify-between">
-            <Logo />
-            <a
-              href="https://aistartify.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hidden text-xs font-medium text-ink-soft sm:block"
-            >
-              LOCUS Hackathon 2026 · Кейс 02
-            </a>
-          </div>
+          <Logo />
           {location.pathname !== '/' && <Stepper />}
         </div>
       </header>
       <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">{children}</main>
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-4 text-xs text-ink-soft sm:px-6">
-        Компас — учебный демо-проект. Данные о вузах приблизительные, уточняйте на официальных сайтах.
-      </footer>
     </div>
   )
 }

@@ -65,6 +65,8 @@ export interface Program {
   whyChosen: string[]
   vibe: string
   faculty: string
+  selectivityLevel: 'Крайне высокая' | 'Очень высокая' | 'Высокая' | 'Средняя' | 'Доступная'
+  selectivityNote: string
   website: string
   dataNote: string
 }

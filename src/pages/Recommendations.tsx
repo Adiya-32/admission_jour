@@ -5,6 +5,14 @@ import { getRecommendations } from '../engine/recommend'
 import { Badge, Button, SectionTitle } from '../components/ui'
 import type { Recommendation } from '../types'
 
+const SELECTIVITY_TONE: Record<string, 'danger' | 'warning' | 'primary' | 'success'> = {
+  'Крайне высокая': 'danger',
+  'Очень высокая': 'danger',
+  Высокая: 'warning',
+  Средняя: 'primary',
+  Доступная: 'success',
+}
+
 function RecommendationCard({ rec, isCompared, onToggleCompare, compareDisabled }: {
   rec: Recommendation
   isCompared: boolean
@@ -19,10 +27,14 @@ function RecommendationCard({ rec, isCompared, onToggleCompare, compareDisabled 
             <h3 className="font-display text-lg font-semibold text-ink">{rec.program.university}</h3>
             {rec.isNew && <Badge tone="accent">Новое совпадение</Badge>}
             <Badge tone="primary">{rec.score}% совпадение</Badge>
+            <Badge tone={SELECTIVITY_TONE[rec.program.selectivityLevel] ?? 'primary'}>
+              Селективность: {rec.program.selectivityLevel}
+            </Badge>
           </div>
           <p className="text-sm text-ink-soft">
             {rec.program.program} · {rec.program.city}, {rec.program.country}
           </p>
+          <p className="mt-1 text-xs text-ink-soft">{rec.program.selectivityNote}</p>
           <p className="mt-2 text-sm text-ink-soft">{rec.program.description}</p>
         </div>
         <div className="shrink-0 text-right">
@@ -96,6 +108,7 @@ function RecommendationCard({ rec, isCompared, onToggleCompare, compareDisabled 
             <span className="font-semibold">Преподаватели: </span>
             <span className="text-ink-soft">{rec.program.faculty}</span>
           </p>
+          <p className="border-t border-border pt-3 text-xs text-ink-soft">{rec.program.dataNote}</p>
         </div>
       </details>
 
