@@ -3,7 +3,6 @@ import type { Program } from '../types'
 const NOTE = 'Демонстрационные данные на основе открытой информации вуза. Уточняйте актуальные условия на официальном сайте.'
 
 export const PROGRAMS: Program[] = [
-  // ───────────────────────── Казахстан ─────────────────────────
   {
     id: 'nu-eds',
     university: 'Nazarbayev University',
@@ -236,7 +235,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Турция ─────────────────────────
   {
     id: 'bilkent-eng',
     university: 'Bilkent University',
@@ -304,7 +302,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Южная Корея ─────────────────────────
   {
     id: 'korea-biz',
     university: 'Korea University',
@@ -372,7 +369,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Германия ─────────────────────────
   {
     id: 'tum-eng',
     university: 'Technical University of Munich',
@@ -407,7 +403,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Польша ─────────────────────────
   {
     id: 'uw-ir',
     university: 'University of Warsaw',
@@ -442,7 +437,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Венгрия ─────────────────────────
   {
     id: 'debrecen-med',
     university: 'University of Debrecen',
@@ -477,7 +471,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Великобритания ─────────────────────────
   {
     id: 'coventry-design',
     university: 'Coventry University',
@@ -545,7 +538,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Россия ─────────────────────────
   {
     id: 'hse-econ',
     university: 'НИУ ВШЭ',
@@ -613,7 +605,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── ОАЭ ─────────────────────────
   {
     id: 'nyuad-hum',
     university: 'NYU Abu Dhabi',
@@ -681,7 +672,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── США ─────────────────────────
   {
     id: 'uiuc-cs',
     university: 'University of Illinois Urbana-Champaign',
@@ -749,7 +739,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Канада ─────────────────────────
   {
     id: 'waterloo-cs',
     university: 'University of Waterloo',
@@ -817,7 +806,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Китай ─────────────────────────
   {
     id: 'tsinghua-eng',
     university: 'Tsinghua University',
@@ -852,7 +840,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Чехия ─────────────────────────
   {
     id: 'charles-hum',
     university: 'Charles University',
@@ -887,7 +874,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Нидерланды ─────────────────────────
   {
     id: 'uva-law',
     university: 'University of Amsterdam',
@@ -922,7 +908,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Кыргызстан ─────────────────────────
   {
     id: 'auca-hum',
     university: 'American University of Central Asia',
@@ -957,7 +942,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Италия ─────────────────────────
   {
     id: 'polimi-design',
     university: 'Politecnico di Milano',
@@ -992,7 +976,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── ещё Казахстан ─────────────────────────
   {
     id: 'satbayev-eng',
     university: 'Satbayev University',
@@ -1027,7 +1010,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Сингапур ─────────────────────────
   {
     id: 'nus-cs',
     university: 'National University of Singapore',
@@ -1062,7 +1044,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Австралия ─────────────────────────
   {
     id: 'unimelb-law',
     university: 'University of Melbourne',
@@ -1097,7 +1078,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Франция ─────────────────────────
   {
     id: 'sciencespo-ir',
     university: 'Sciences Po Paris',
@@ -1132,7 +1112,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Австрия ─────────────────────────
   {
     id: 'univie-sci',
     university: 'University of Vienna',
@@ -1167,7 +1146,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Финляндия ─────────────────────────
   {
     id: 'aalto-design',
     university: 'Aalto University',
@@ -1202,7 +1180,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Япония ─────────────────────────
   {
     id: 'waseda-biz',
     university: 'Waseda University',
@@ -1237,7 +1214,6 @@ export const PROGRAMS: Program[] = [
     dataNote: NOTE,
   },
 
-  // ───────────────────────── Испания ─────────────────────────
   {
     id: 'ie-biz',
     university: 'IE University',

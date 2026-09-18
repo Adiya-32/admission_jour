@@ -16,7 +16,6 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
   const reasons: RecommendationReason[] = []
   let score = 0
 
-  // Field match — 20, + бонус за совпадение уточняющей специализации — 10
   const matchedFields = program.fields.filter((f) => profile.interests.includes(f))
   if (matchedFields.length > 0) {
     const points = Math.min(20, matchedFields.length * 12)
@@ -34,7 +33,6 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
     reasons.push({ type: 'caution', text: 'Не совпадает с уточнённой специализацией, которую вы выбрали' })
   }
 
-  // Budget — 18
   if (program.tuitionUSD <= profile.budgetUSD) {
     score += 18
     if (program.tuitionUSD === 0) {
@@ -58,7 +56,7 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
     })
   }
 
-  // Country — 27 (сильный вес: если страны явно выбраны, несовпадение ощутимо понижает рейтинг)
+  // страна — самый весомый критерий, если пользователь явно её выбрал
   if (profile.countries.length === 0) {
     score += 13
   } else if (profile.countries.includes(program.country)) {
@@ -69,9 +67,7 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
     reasons.push({ type: 'caution', text: `${program.country} не входит в выбранные вами страны` })
   }
 
-  // Readiness: English/GPA/ENT — 17
   let readiness = 0
-  const readinessMax = 17
   const parts: string[] = []
   const cautionParts: string[] = []
 
@@ -98,11 +94,7 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
   score += readiness
   if (parts.length > 0) reasons.push({ type: 'match', text: `Готовность подтверждена: ${parts.join('; ')}` })
   if (cautionParts.length > 0) reasons.push({ type: 'caution', text: `Стоит подтянуть: ${cautionParts.join('; ')}` })
-  if (readiness === readinessMax) {
-    // already covered above
-  }
 
-  // Timeline / deadlines — 10
   if (profile.timeline === 'в этом году') {
     score += 10
     reasons.push({ type: 'match', text: `Дедлайны (${program.deadlineWindow}) актуальны для поступления в этом году` })
@@ -110,7 +102,6 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
     score += 6
   }
 
-  // Dorm / scholarship soft preferences
   if (profile.dormNeeded && program.dormitory) {
     reasons.push({ type: 'match', text: 'Есть общежитие — важный для вас критерий' })
   } else if (profile.dormNeeded && !program.dormitory) {
