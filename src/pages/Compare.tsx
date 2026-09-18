@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../state/AppContext'
 import { PROGRAMS } from '../data/programs'
-import { Button, SectionTitle } from '../components/ui'
+import { Button, EmptyState, SectionTitle } from '../components/ui'
 
 const ROWS: { label: string; render: (p: (typeof PROGRAMS)[number]) => string }[] = [
   { label: 'Страна и город', render: (p) => `${p.country}, ${p.city}` },
@@ -29,8 +29,13 @@ export function Compare() {
   if (programs.length < 2) {
     return (
       <div>
-        <SectionTitle eyebrow="Шаг 5 из 6" title="Сравнение" description="Выберите минимум два варианта на странице рекомендаций." />
-        <Button onClick={() => navigate('/recommendations')}>← К рекомендациям</Button>
+        <SectionTitle eyebrow="Шаг 5 из 6" title="Сравнение" />
+        <EmptyState
+          icon="⇄"
+          title="Пока нечего сравнивать"
+          description="Отметьте минимум два варианта галочкой «Добавить к сравнению» на странице рекомендаций — и таблица соберётся сама."
+          action={<Button onClick={() => navigate('/recommendations')}>К рекомендациям</Button>}
+        />
       </div>
     )
   }

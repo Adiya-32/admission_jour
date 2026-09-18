@@ -42,6 +42,27 @@ export function Badge({ tone = 'primary', children }: { tone?: 'primary' | 'succ
   return <span className={clsx('inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold', toneClasses[tone])}>{children}</span>
 }
 
+export function EmptyState({
+  icon = '◎',
+  title,
+  description,
+  action,
+}: {
+  icon?: string
+  title: string
+  description: string
+  action?: ReactNode
+}) {
+  return (
+    <div className="card flex flex-col items-center gap-3 px-6 py-14 text-center">
+      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-soft text-2xl text-primary">{icon}</span>
+      <p className="font-display text-lg font-semibold text-ink">{title}</p>
+      <p className="max-w-sm text-sm text-ink-soft">{description}</p>
+      {action && <div className="mt-2">{action}</div>}
+    </div>
+  )
+}
+
 export function SectionTitle({ eyebrow, title, description }: { eyebrow?: string; title: string; description?: string }) {
   return (
     <div className="mb-6">
