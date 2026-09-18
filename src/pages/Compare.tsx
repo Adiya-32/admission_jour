@@ -14,6 +14,10 @@ const ROWS: { label: string; render: (p: (typeof PROGRAMS)[number]) => string }[
   { label: 'Окно дедлайнов', render: (p) => p.deadlineWindow },
   { label: 'Стипендии', render: (p) => (p.scholarshipAvailable ? 'Доступны' : 'Обычно нет') },
   { label: 'Общежитие', render: (p) => (p.dormitory ? 'Есть' : 'Нет') },
+  { label: 'Репутация', render: (p) => p.reputation },
+  { label: 'Сильная сторона', render: (p) => p.whyChosen[0] },
+  { label: 'На что обратить внимание', render: (p) => p.weaknesses[0] },
+  { label: 'Кампус', render: (p) => p.vibe },
 ]
 
 export function Compare() {

@@ -16,14 +16,22 @@ function scoreProgram(profile: Profile, program: Program): { score: number; reas
   const reasons: RecommendationReason[] = []
   let score = 0
 
-  // Field match — 25
+  // Field match — 20, + бонус за совпадение уточняющей специализации — 10
   const matchedFields = program.fields.filter((f) => profile.interests.includes(f))
   if (matchedFields.length > 0) {
-    const points = Math.min(25, matchedFields.length * 15)
+    const points = Math.min(20, matchedFields.length * 12)
     score += points
     reasons.push({ type: 'match', text: `Совпадает с вашим интересом: ${matchedFields.join(', ')}` })
   } else if (profile.interests.length > 0) {
     reasons.push({ type: 'caution', text: 'Направление не входит в список ваших интересов' })
+  }
+
+  const matchedSpecializations = (program.specializations ?? []).filter((s) => profile.specializations.includes(s))
+  if (matchedSpecializations.length > 0) {
+    score += Math.min(10, matchedSpecializations.length * 6)
+    reasons.push({ type: 'match', text: `Совпадает с уточнённым фокусом: ${matchedSpecializations.join(', ')}` })
+  } else if (profile.specializations.length > 0 && matchedFields.length > 0) {
+    reasons.push({ type: 'caution', text: 'Не совпадает с уточнённой специализацией, которую вы выбрали' })
   }
 
   // Budget — 18
@@ -127,6 +135,6 @@ export function getRecommendations(profile: Profile, previousTopIds: string[] = 
 
   return scored.map((item, index) => ({
     ...item,
-    isNew: index < 6 && !previousTopIds.includes(item.program.id),
+    isNew: index < 8 && !previousTopIds.includes(item.program.id),
   }))
 }

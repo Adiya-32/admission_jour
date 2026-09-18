@@ -60,7 +60,46 @@ function RecommendationCard({ rec, isCompared, onToggleCompare, compareDisabled 
         </ul>
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+      <details className="group mt-4 border-t border-border pt-4">
+        <summary className="cursor-pointer list-none text-sm font-medium text-primary hover:underline">
+          Репутация, кампус и преподаватели ↓
+        </summary>
+        <div className="mt-3 space-y-3 text-sm text-ink">
+          <p>{rec.program.reputation}</p>
+          <div>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">Почему выбирают</p>
+            <ul className="space-y-1">
+              {rec.program.whyChosen.map((w, i) => (
+                <li key={i} className="flex gap-2">
+                  <span className="mt-0.5 shrink-0 text-success">+</span>
+                  {w}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink-soft">На что обратить внимание</p>
+            <ul className="space-y-1">
+              {rec.program.weaknesses.map((w, i) => (
+                <li key={i} className="flex gap-2 text-ink-soft">
+                  <span className="mt-0.5 shrink-0 text-warning">−</span>
+                  {w}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p>
+            <span className="font-semibold">Кампус: </span>
+            <span className="text-ink-soft">{rec.program.vibe}</span>
+          </p>
+          <p>
+            <span className="font-semibold">Преподаватели: </span>
+            <span className="text-ink-soft">{rec.program.faculty}</span>
+          </p>
+        </div>
+      </details>
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
         <a href={rec.program.website} target="_blank" rel="noreferrer" className="text-sm font-medium text-primary hover:underline">
           Официальный сайт вуза ↗
         </a>
@@ -86,11 +125,11 @@ export function Recommendations() {
   const { inCountry, outCountry } = useMemo(() => {
     const all = getRecommendations(profile, previousTopIds)
     if (profile.countries.length === 0) {
-      return { inCountry: all.slice(0, 6), outCountry: [] as Recommendation[] }
+      return { inCountry: all.slice(0, 8), outCountry: [] as Recommendation[] }
     }
     const matched = all.filter((r) => profile.countries.includes(r.program.country))
     const rest = all.filter((r) => !profile.countries.includes(r.program.country))
-    const inCountry = matched.slice(0, 6)
+    const inCountry = matched.slice(0, 8)
     const remainingSlots = Math.max(0, Math.max(3, inCountry.length) - inCountry.length)
     const outCountry = inCountry.length === 0 ? rest.slice(0, 6) : rest.slice(0, remainingSlots)
     return { inCountry, outCountry }

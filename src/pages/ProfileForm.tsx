@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useApp } from '../state/AppContext'
 import type { Profile } from '../types'
-import { COUNTRIES, ENGLISH_LEVELS, INTERESTS, LANGUAGES } from '../data/constants'
+import { COUNTRIES, ENGLISH_LEVELS, INTERESTS, LANGUAGES, SPECIALIZATIONS } from '../data/constants'
 import { Button, Chip, SectionTitle } from '../components/ui'
 import { getRecommendations } from '../engine/recommend'
 
@@ -21,7 +21,7 @@ export function ProfileForm() {
 
   function handleSubmit() {
     const prevTop = getRecommendations(profile)
-      .slice(0, 6)
+      .slice(0, 8)
       .map((r) => r.program.id)
     setPreviousTopIds(prevTop)
     setProfile(draft)
@@ -91,6 +91,32 @@ export function ProfileForm() {
               </Chip>
             ))}
           </div>
+
+          {draft.interests.some((i) => SPECIALIZATIONS[i]) && (
+            <div className="mt-5 space-y-4 border-t border-border pt-4">
+              <p className="text-sm text-ink-soft">
+                Уточните фокус внутри интересов — так рекомендации будут точнее, а не просто «по широкому направлению»
+              </p>
+              {draft.interests
+                .filter((i) => SPECIALIZATIONS[i])
+                .map((interest) => (
+                  <div key={interest}>
+                    <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-ink-soft">{interest}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {SPECIALIZATIONS[interest].map((spec) => (
+                        <Chip
+                          key={spec}
+                          active={draft.specializations.includes(spec)}
+                          onClick={() => update('specializations', toggleInArray(draft.specializations, spec))}
+                        >
+                          {spec}
+                        </Chip>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
         </section>
 
         {/* Academics */}

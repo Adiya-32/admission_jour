@@ -13,6 +13,7 @@ export interface Profile {
   name: string
   grade: Grade
   interests: string[]
+  specializations: string[]
   gpa: number // из 5.0
   englishLevel: EnglishLevel
   languages: string[]
@@ -28,6 +29,7 @@ export const emptyProfile: Profile = {
   name: '',
   grade: '11',
   interests: [],
+  specializations: [],
   gpa: 4.0,
   englishLevel: 'B1',
   languages: ['Русский'],
@@ -46,6 +48,7 @@ export interface Program {
   country: string
   city: string
   fields: string[]
+  specializations?: string[]
   tuitionUSD: number // 0 = полностью бесплатно/грант
   minIELTS?: number
   minGPA?: number
@@ -57,6 +60,11 @@ export interface Program {
   languageOfInstruction: string[]
   description: string
   strengths: string[]
+  weaknesses: string[]
+  reputation: string
+  whyChosen: string[]
+  vibe: string
+  faculty: string
   website: string
   dataNote: string
 }
